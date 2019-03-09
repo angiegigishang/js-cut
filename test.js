@@ -57,27 +57,16 @@ window.onload = function() {
 
 	window.onmousemove = function (e) {
 		if(ifKeyDown == true) {
-			if(contact == "right") {
-				rightMove(e);
-			} else if (contact == "up") {
-				upMove(e); 
-			} else if (contact == "left") {
-				leftMove(e);
-			} else if (contact == "down") {
-				downMove(e);
-			} else if (contact == "left-up") {
-				upMove(e); 
-				leftMove(e);
-			} else if (contact == "right-up") {
-				rightMove(e);
-				upMove(e); 
-			} else if (contact == "left-down") {
-				leftMove(e);
-				downMove(e);
-			} else if (contact == "right-down") {
-				rightMove(e);
-				downMove(e);
-			}	
+			switch(contact) {
+				case "right": rightMove(e); break;
+				case "up": upMove(e); break;
+				case "left": leftMove(e); break;
+				case "down": downMove(e); break;
+				case "left-up": upMove(e); leftMove(e); break;
+				case "right-up": rightMove(e); upMove(e); break; 
+				case "left-down": leftMove(e); downMove(e); break;
+				case "right-down": rightMove(e); downMove(e); break;
+			}
 		}	
 	}
 
