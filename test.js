@@ -13,7 +13,8 @@ window.onload = function() {
 	var ifKeyDown = false;
 	var contact = "";
 
-	rightDiv.onmousedown = function() {
+	rightDiv.onmousedown = function(e) {
+		e.stopProgation();  //阻止事件冒泡
 		ifKeyDown = true;
 		contact = "right";
 	}
@@ -70,7 +71,8 @@ window.onload = function() {
 				case "right-down": rightMove(e); downMove(e); break;
 			}
 		}	
-		setChoice()
+		setChoice();
+		setPreview();
 	}
 
 	function rightMove (e) {
@@ -126,6 +128,17 @@ window.onload = function() {
 		var left = mainDiv.offsetLeft;
 		var img2 = document.getElementById("img2");
 		img2.style.clip = "rect("+top+"px, "+right+"px, "+bottom+"px, "+left+"px)"
+	}
+
+	function setPreview() {
+		var top = mainDiv.offsetTop;
+		var right = mainDiv.offsetLeft + mainDiv.offsetWidth;
+		var bottom = mainDiv.offsetTop + mainDiv.offsetHeight;
+		var left = mainDiv.offsetLeft;
+		var img3 = document.getElementById("img3");
+		img3.style.top = -top + "px";
+		img3.style.left = -left + "px";
+		img3.style.clip = "rect("+top+"px, "+right+"px, "+bottom+"px, "+left+"px)"
 	}
 }
 
