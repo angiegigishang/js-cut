@@ -1,4 +1,6 @@
+
 window.onload = function() {
+	document.onselectstart = new Function('event.returnValue = false;');
 	var upDiv = document.getElementById("up");
 	var rightDiv = document.getElementById("right");
 	var mainDiv = document.getElementById("main");
@@ -68,6 +70,7 @@ window.onload = function() {
 				case "right-down": rightMove(e); downMove(e); break;
 			}
 		}	
+		setChoice()
 	}
 
 	function rightMove (e) {
@@ -103,19 +106,29 @@ window.onload = function() {
 		var addHeight = y - mainY - heightBefore;
 		mainDiv.style.height = heightBefore + addHeight + "px";
 	}	
-}
 
-
-
-
-function getPosition (node) {
-	var left = node.offsetLeft;
-	var top = node.offsetTop;
-	var parent = node.offsetParent;
-	while(parent != null) {
-		left += parent.offsetLeft;
-		top += parent.offsetTop;
-		parent = parent.offsetParent;
+	function getPosition (node) {
+		var left = node.offsetLeft;
+		var top = node.offsetTop;
+		var parent = node.offsetParent;
+		while(parent != null) {
+			left += parent.offsetLeft;
+			top += parent.offsetTop;
+			parent = parent.offsetParent;
+		}
+		return {"left": left, "top": top};
 	}
-	return {"left": left, "top": top};
+
+	function setChoice() {
+		var top = mainDiv.offsetTop;
+		var right = mainDiv.offsetLeft + mainDiv.offsetWidth;
+		var bottom = mainDiv.offsetTop + mainDiv.offsetHeight;
+		var left = mainDiv.offsetLeft;
+		var img2 = document.getElementById("img2");
+		img2.style.clip = "rect("+top+"px, "+right+"px, "+bottom+"px, "+left+"px)"
+	}
 }
+
+
+
+
